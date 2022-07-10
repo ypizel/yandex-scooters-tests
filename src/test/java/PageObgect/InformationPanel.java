@@ -3,6 +3,8 @@ package PageObgect;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class InformationPanel {
 
@@ -43,74 +45,110 @@ public class InformationPanel {
         return driver.findElement(paymentInfoButton);
     }
 
+    public WebElement getPaymentInfoLocator() {
+        return driver.findElement(paymentInfo);
+    }
     public WebElement getAmountOfScootersButtonLocator() {
         return driver.findElement(amountOfScootersInfoButton);
+    }
+    public WebElement getAmountOfScootersInfoLocator(){
+        return driver.findElement(amountOfScootersInfo);
     }
 
     public WebElement getRentTimeButtonLocator() {
         return driver.findElement(rentTimeInfoButton);
     }
 
+    public WebElement getRentTimeInfoLocator(){
+        return driver.findElement(rentTimeInfo);
+    }
     public WebElement getScooterTodayButtonLocator() {
         return driver.findElement(scooterTodayInfoButton);
     }
-
+    public WebElement getScootersInfoLocator(){
+        return driver.findElement(scooterTodayInfo);
+    }
     public WebElement getExtendReturnButtonLocator() {
         return driver.findElement(extendReturnInfoButton);
+    }
+    public WebElement getExtendReturnInfoLocator(){
+        return driver.findElement(extendReturnInfo);
     }
 
     public WebElement getChargerCableButtonLocator() {
         return driver.findElement(chargerCableInfoButton);
     }
-
+    public WebElement getChargerCableInfoLocator(){
+        return driver.findElement(chargerCableInfo);
+    }
     public WebElement getOrderCancellationButtonLocator() {
         return driver.findElement(orderCancellationInfoButton);
     }
-
+    public WebElement getOrderCancellationInfoLocator(){
+        return driver.findElement(orderCancellationInfo);
+    }
     public WebElement getCoverageZoneButtonLocator() {
         return driver.findElement(coverageZoneInfoButton);
     }
-
+    public WebElement getCoverageZoneInfoLocator() {
+        return driver.findElement(coverageZoneInfo);
+    }
 
 
     // Кнопки с информацией
     public String getPaymentInfo(){
         driver.findElement(paymentInfoButton).click();
+        WebDriverWait pouse = new WebDriverWait(driver, 3);
+        pouse.until(ExpectedConditions.visibilityOf((getPaymentInfoLocator())));
         return driver.findElement(paymentInfo).getText();
     }
 
     public String getAmountOfScootersInfo(){
         driver.findElement(amountOfScootersInfoButton).click();
+        WebDriverWait pouse = new WebDriverWait(driver, 3);
+        pouse.until(ExpectedConditions.visibilityOf(getAmountOfScootersInfoLocator()));
         return driver.findElement(amountOfScootersInfo).getText();
     }
 
     public String getRentTimeInfo(){
         driver.findElement(rentTimeInfoButton).click();
+        WebDriverWait pouse = new WebDriverWait(driver, 3);
+        pouse.until(ExpectedConditions.visibilityOf(getRentTimeInfoLocator()));
         return driver.findElement(rentTimeInfo).getText();
     }
 
     public String getScooterTodayInfo(){
         driver.findElement(scooterTodayInfoButton).click();
+        WebDriverWait pouse = new WebDriverWait(driver, 3);
+        pouse.until(ExpectedConditions.visibilityOf(getScootersInfoLocator()));
         return driver.findElement(scooterTodayInfo).getText();
     }
 
     public String getExtendReturnInfo(){
         driver.findElement(extendReturnInfoButton).click();
+        WebDriverWait pouse = new WebDriverWait(driver, 3);
+        pouse.until(ExpectedConditions.visibilityOf(getExtendReturnInfoLocator()));
         return driver.findElement(extendReturnInfo).getText();
     }
 
     public String getChargerCableInfo(){
         driver.findElement(chargerCableInfoButton).click();
+        WebDriverWait pouse = new WebDriverWait(driver, 3);
+        pouse.until(ExpectedConditions.visibilityOf(getChargerCableInfoLocator()));
         return driver.findElement(chargerCableInfo).getText();
     }
 
     public String getOrderCancellationInfo(){
         driver.findElement(orderCancellationInfoButton).click();
+        WebDriverWait pouse = new WebDriverWait(driver, 3);
+        pouse.until(ExpectedConditions.visibilityOf(getOrderCancellationInfoLocator()));
         return driver.findElement(orderCancellationInfo).getText();
     }
 
     public String getCoverageZoneInfo(){
        driver.findElement(coverageZoneInfoButton).click();
+        WebDriverWait pouse = new WebDriverWait(driver, 3);
+        pouse.until(ExpectedConditions.visibilityOf(getCoverageZoneInfoLocator()));
        return driver.findElement(coverageZoneInfo).getText();
     }
 }

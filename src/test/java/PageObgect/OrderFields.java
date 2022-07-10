@@ -57,7 +57,9 @@ public class OrderFields {
         ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", element);
         element.click();
     }
-
+    public WebElement getBottomOrderButtonLocator() {
+        return driver.findElement(bottomOrderButton);
+    }
     // Локатор страницы информации о пользователе
     public WebElement getNameFieldLocator(){
         return driver.findElement(nameField);

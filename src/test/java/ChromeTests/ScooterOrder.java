@@ -4,6 +4,7 @@ import PageObgect.OrderFields;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.After;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -26,10 +27,8 @@ public class ScooterOrder {
      public void checkMakeOrderWithTopButton() {
         driver.get(YANDEX_SCOOTER);
         OrderFields orderFields = new OrderFields(driver);
-
         orderFields.clickTopOrderButton();
         WebDriverWait pause = new WebDriverWait(driver, 3);
-
             pause.until(ExpectedConditions.elementToBeClickable(orderFields.getNameFieldLocator()));
         orderFields.setClientInfo();
             pause.until(ExpectedConditions.elementToBeClickable(orderFields.getDeliveryDateFieldLocator()));
@@ -43,7 +42,7 @@ public class ScooterOrder {
     public void checkMakeOrderWithBottomButton() {
         driver.get(YANDEX_SCOOTER);
         OrderFields orderFields = new OrderFields(driver);
-
+        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();",orderFields.getBottomOrderButtonLocator());
         orderFields.clickBottomOrderButton();
         WebDriverWait pause = new WebDriverWait(driver, 3);
             pause.until(ExpectedConditions.elementToBeClickable(orderFields.getNameFieldLocator()));

@@ -34,8 +34,7 @@ public class ErrorsInSurnameField {
                 {"Ю", "Введите корректную фамилию"},
                 {"О'Донел", "Введите корректную фамилию"},
                 {"Альбус Персиваль", "Введите корректную фамилию"},
-                {"Мак-Кинли", "Введите корректную фамилию"},
-                {"Ходжаджалалетдини", "Введите корректную фамилию"},
+                {"Мак-Кинли", "Введите корректную фамилию"}
         };
     }
     @Before
@@ -44,7 +43,6 @@ public class ErrorsInSurnameField {
         driver = new ChromeDriver();
         builder = new Actions(driver);
     }
-
     @Test
     public void checkErrorsInSurnameField() {
         driver.get(FIRST_ORDER_PAGE);

@@ -35,7 +35,6 @@ public class ImportantQuestions {
         ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", locator1);
         String actualResult = informationPanel.getPaymentInfo();
         assertEquals("Information not found or incorrect", PAYMENT_INFO, actualResult);
-
     }
 
     @Test
@@ -54,26 +53,24 @@ public class ImportantQuestions {
     public void checkRentTimeInfoRight(){
         driver.get(YANDEX_SCOOTER);
         InformationPanel informationPanel = new InformationPanel(driver);
-        WebDriverWait pause = new WebDriverWait(driver, 3);
         WebElement locator3 = informationPanel.getRentTimeButtonLocator();
+        WebDriverWait pause = new WebDriverWait(driver, 3);
             pause.until(ExpectedConditions.elementToBeClickable(locator3));
         ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", locator3);
         String actualResult = informationPanel.getRentTimeInfo();
         assertEquals("Information not found or incorrect", RENT_TIME_INFO, actualResult);
-
     }
 
     @Test
     public void checkScooterTodayInfoRight(){
         driver.get(YANDEX_SCOOTER);
         InformationPanel informationPanel = new InformationPanel(driver);
-        WebElement locator4 = informationPanel.getScooterTodayButtonLocator(); //--
+        WebElement locator4 = informationPanel.getScooterTodayButtonLocator();
         WebDriverWait pause = new WebDriverWait(driver, 3);
             pause.until(ExpectedConditions.elementToBeClickable(locator4));
         ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", locator4);
         String actualResult = informationPanel.getScooterTodayInfo();
         assertEquals("Information not found or incorrect", SCOOTER_TODAY_INFO, actualResult);
-
     }
 
     @Test
@@ -92,7 +89,7 @@ public class ImportantQuestions {
     public void checkChargerCableInfoRight(){
         driver.get(YANDEX_SCOOTER);
         InformationPanel informationPanel = new InformationPanel(driver);
-        WebElement locator6 = informationPanel.getChargerCableButtonLocator(); //--
+        WebElement locator6 = informationPanel.getChargerCableButtonLocator();
         WebDriverWait pause = new WebDriverWait(driver, 3);
             pause.until(ExpectedConditions.elementToBeClickable(locator6));
         ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", locator6);
@@ -104,7 +101,7 @@ public class ImportantQuestions {
     public void checkOrderCancellationInfoRight(){
         driver.get(YANDEX_SCOOTER);
         InformationPanel informationPanel = new InformationPanel(driver);
-        WebElement locator7 = informationPanel.getOrderCancellationButtonLocator(); //--
+        WebElement locator7 = informationPanel.getOrderCancellationButtonLocator();
         WebDriverWait pause = new WebDriverWait(driver, 3);
             pause.until(ExpectedConditions.elementToBeClickable(locator7));
         ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", locator7);
@@ -116,7 +113,7 @@ public class ImportantQuestions {
     public void checkCoverageZoneInfoRight(){
         driver.get(YANDEX_SCOOTER);
         InformationPanel informationPanel = new InformationPanel(driver);
-        WebElement locator8 = informationPanel.getCoverageZoneButtonLocator(); //--
+        WebElement locator8 = informationPanel.getCoverageZoneButtonLocator();
         WebDriverWait pause = new WebDriverWait(driver, 3);
             pause.until(ExpectedConditions.elementToBeClickable(locator8));
         ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", locator8);
