@@ -6,34 +6,27 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
 import static Constants.URL.YANDEX_SCOOTER;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class WrongOrderNumber {
 
-    public WebDriver driver;
-    String expectedRedult = "Такого заказа нет";
+    private WebDriver driver;
+    private HomePage homePage;
 
     @Before
     public void setDriver() {
         System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
         driver = new ChromeDriver();
+        homePage = new HomePage(driver);
     }
 
     @Test
     public void putWrongOrderNumberNoOrder() {
         driver.get(YANDEX_SCOOTER);
-        HomePage homePage = new HomePage(driver);
-        WebDriverWait pause = new WebDriverWait(driver, 3);
-            pause.until(ExpectedConditions.elementToBeClickable(homePage.getOrderStatusButtonLocator()));
         homePage.clickOrderStatusButton();
-            pause.until(ExpectedConditions.visibilityOf(homePage.getOrderStatusFieldLocator()));
         homePage.setOrderStatus("123454");
-        String actualResult = homePage.getNoOrderNotification();
-        assertEquals(expectedRedult, actualResult);
+        assertTrue(homePage.getNoOrderNotification().isDisplayed());
     }
     @After
     public void teardown(){

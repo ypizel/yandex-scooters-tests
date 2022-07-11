@@ -18,9 +18,12 @@ import static org.junit.Assert.assertEquals;
 public class ErrorsInNameFIeld {
 
     private WebDriver driver;
+    private OrderFields orderFields;
+    private ErrorsMessages errorsMessages;
     private Actions builder;
     private final String name;
     private final String expectedErrorMessage;
+
 
     public ErrorsInNameFIeld(String name, String expectedErrorMessage){
         this.name = name;
@@ -43,17 +46,16 @@ public class ErrorsInNameFIeld {
         System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
         driver = new ChromeDriver();
         builder = new Actions(driver);
+        orderFields = new OrderFields(driver);
+        errorsMessages = new ErrorsMessages(driver);
     }
 
     @Test
     public void checkErrorsInNameField() {
         driver.get(FIRST_ORDER_PAGE);
-        ErrorsMessages errorsMessages = new ErrorsMessages(driver);
-        OrderFields orderFields = new OrderFields(driver);
         orderFields.setName(name);
         builder.sendKeys(Keys.TAB).build().perform();
-        String actualResult = errorsMessages.getNameErrorMessage();
-        assertEquals(expectedErrorMessage, actualResult);
+        assertEquals(expectedErrorMessage, errorsMessages.getNameErrorMessage());
     }
     @After
     public void teardown(){

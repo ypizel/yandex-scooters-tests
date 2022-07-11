@@ -4,6 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class OrderFields {
 
@@ -52,24 +54,33 @@ public class OrderFields {
     public void clickTopOrderButton(){
         driver.findElement(topRightOrderButton).click();
     }
-    public void clickBottomOrderButton(){
-        WebElement element = driver.findElement(bottomOrderButton);
-        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", element);
-        element.click();
-    }
-    public WebElement getBottomOrderButtonLocator() {
+    private WebElement getBottomOrderButtonLocator() {
         return driver.findElement(bottomOrderButton);
     }
+    public void scrollToBottomButton(){
+        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", getBottomOrderButtonLocator());
+    }
+    private void waitElementClickable(WebElement element){
+        WebDriverWait pause = new WebDriverWait(driver, 3);
+        pause.until(ExpectedConditions.elementToBeClickable(element));
+    }
+    public void clickBottomOrderButton(){
+        WebElement element = driver.findElement(bottomOrderButton);
+        waitElementClickable(element);
+        scrollToBottomButton();
+        element.click();
+    }
+
     // Локатор страницы информации о пользователе
-    public WebElement getNameFieldLocator(){
+    private WebElement getNameFieldLocator(){
         return driver.findElement(nameField);
     }
     // Локаторы страницы информации о самокате
-    public WebElement getDeliveryDateFieldLocator() {
+    private WebElement getDeliveryDateFieldLocator() {
         return driver.findElement(deliveryDateField);
     }
     // Локатор кнопки подтверждения заказа
-    public WebElement getOrderConfirmationButtonLocator() {
+    private WebElement getOrderConfirmationButtonLocator() {
         return driver.findElement((orderConfirmationButton));
     }
 
@@ -101,49 +112,48 @@ public class OrderFields {
     }
 
     // Заполнение полей о самокате
-    public void setDeliveryDate(String date){
+    private void setDeliveryDate(String date){
         driver.findElement(deliveryDateField).sendKeys(date);
     }
 
-    public void setRentPeriod() {
+    private void setRentPeriod() {
         driver.findElement(rentPeriod).click();
         driver.findElement(twoDays).click();
     }
 
-    public void setBlackColorCheckBox() {
+    private void setBlackColorCheckBox() {
         driver.findElement(blackColorCheckBox).click();
     }
 
     // Клик на кнопку далее
-    public void clickNextButton() {
+    private void clickNextButton() {
         driver.findElement(nextButton).click();
     }
     // Клик на финальную кнопку заказать
-    public void clickLastOrderButton() {
+    private void clickLastOrderButton() {
         driver.findElement(lastOrderButton).click();
     }
 
     // Клик на кнопку подтверждения "да"
     public void clickOrderConfirmationButton() {
+        waitElementClickable(getOrderConfirmationButtonLocator());
         driver.findElement(orderConfirmationButton).click();
     }
 
     // Ввести всю информацию о клиенте
-    public void setClientInfo() {
+    public void setAllOrderFields() {
+        waitElementClickable(getNameFieldLocator());
         setName("Иван");
         setSurname("Иванов");
         setAddress("Маяковская 19");
         setMetroStation("Аэро");
         setPhoneNumber("89114543454");
         clickNextButton();
-    }
-
-    // Ввести всю инофрмацию о клиенте
-    public void setScooterInformation() {
+        waitElementClickable(getDeliveryDateFieldLocator());
         setDeliveryDate("15.07.2022");
         setRentPeriod();
         setBlackColorCheckBox();
         clickLastOrderButton();
+        clickOrderConfirmationButton();
     }
-
 }
