@@ -1,4 +1,4 @@
-package PageObgect;
+package PageObject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -7,9 +7,12 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.ArrayList;
 import java.util.List;
-public class HomePage {
+public class HomePage extends BaseObjectPage {
 
-    private final WebDriver driver;
+    public HomePage(WebDriver driver){
+        super(driver);
+    }
+    public static String URL = "https://qa-scooter.praktikum-services.ru/";
     // Лого скутер и хедер главной страницы
     private final By scooterLogo = By.className("Header_LogoScooter__3lsAR");
     private final By mainPageHeader = By.className("Home_Header__iJKdX");
@@ -27,15 +30,22 @@ public class HomePage {
     // Уведомление "такого заказа нет"
     private final By noOrder = By.xpath(".//img[@alt='Not found']");
 
-    public HomePage(WebDriver driver){
-        this.driver = driver;
+    @Override
+    public HomePage open(){
+        driver.get(URL);
+        return this;
+    }
+    public void waitElementToBeClickable(WebElement element){
+        WebDriverWait pause = new WebDriverWait(driver, 3);
+        pause.until(ExpectedConditions.elementToBeClickable(element));
     }
 
     // Лого Самокат это ссылка на главную
-    public void clickScooterLogo() {
+    public HomePage clickScooterLogo() {
         WebElement element = driver.findElement(scooterLogo);
         waitElementToBeClickable(element);
         element.click();
+        return this;
     }
     public String getMainPageHeaderText(){
         WebDriverWait pause = new WebDriverWait(driver, 3);
@@ -45,30 +55,20 @@ public class HomePage {
     }
 
     // Лого яндекс ведет не главную страницу "Яндекса"
-    public void clickYandexLogo() {
+    public HomePage clickYandexLogo() {
         WebElement element = driver.findElement(yandexLogo);
         waitElementToBeClickable(element);
         element.click();
+        return this;
     }
-    public WebElement getMainPageYandexLogoLocator() {
+    public boolean getYandexLogoIsDisplayed() {
         List<String> browserTabs = new ArrayList<String>(driver.getWindowHandles());
         driver.switchTo().window(browserTabs .get(1));
         WebElement element = driver.findElement(mainPageYandexLogoLocator);
-        return element;
+        return element.isDisplayed();
     }
 
     // Неправильный номер - заказа нет
-    public void waitElementToBeClickable(WebElement element){
-        WebDriverWait pause = new WebDriverWait(driver, 3);
-            pause.until(ExpectedConditions.elementToBeClickable(element));
-    }
-
-    public void clickOrderStatusButton(){
-        WebElement element = driver.findElement(orderStatusButton);
-        waitElementToBeClickable(element);
-        element.click();
-
-    }
     public void inputOrderNumber(String orderNumber){
         WebElement element = driver.findElement(orderStatusField);
         waitElementToBeClickable(element);
@@ -77,15 +77,23 @@ public class HomePage {
     public void clickSendOrderNumberStatus(){
         driver.findElement(sendOrderNumberButton).click();
     }
-    public void setOrderStatus(String orderNumber) {
+
+    public HomePage clickOrderStatusButton(){
+        WebElement element = driver.findElement(orderStatusButton);
+        waitElementToBeClickable(element);
+        element.click();
+        return this;
+    }
+    public HomePage setOrderStatus(String orderNumber) {
         clickOrderStatusButton();
         inputOrderNumber(orderNumber);
         clickSendOrderNumberStatus();
+        return this;
     }
-    public WebElement getNoOrderNotification(){
+    public boolean getNoOrderNotification(){
         WebElement element = driver.findElement(noOrder);
         WebDriverWait pause = new WebDriverWait(driver, 3);
             pause.until(ExpectedConditions.visibilityOf(element));
-        return element;
+        return element.isDisplayed();
     }
 }

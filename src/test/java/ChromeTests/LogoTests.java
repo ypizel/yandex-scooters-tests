@@ -1,45 +1,27 @@
 package ChromeTests;
 
-import PageObgect.HomePage;
-import org.junit.Before;
+import PageObject.HomePage;
 import org.junit.Test;
-import org.junit.After;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import static Constants.URL.FIRST_ORDER_PAGE;
-import static Constants.URL.YANDEX_SCOOTER;
 import static org.junit.Assert.assertTrue;
 
-public class LogoTests {
-    private WebDriver driver;
-    private HomePage homePage;
-
-    @Before
-    public void setDriver(){
-        // Создаём драйвер для браузера Chrome
-        System.setProperty("webdriver.chrome.driver" ,  "chromedriver.exe");
-        driver = new ChromeDriver();
-        homePage = new HomePage(driver);
-    }
+public class LogoTests extends BaseChromeUITest {
 
     @Test
     public void checkClickScooterLogoLeadsToScooterMainPage() {
-    driver.get(FIRST_ORDER_PAGE);
-
-    homePage.clickScooterLogo();
-    String expectedResult = "Самокат\n" + "на пару дней\n" + "Привезём его прямо к вашей двери,\n" + "а когда накатаетесь — заберём\n";
-    assertTrue("Лого самокат не ведет на главную", expectedResult.contains(homePage.getMainPageHeaderText()));
+        String mainPageHeaderText = new HomePage(driver)
+                .open()
+                .clickScooterLogo()
+                .getMainPageHeaderText();
+        String expectedResult = "Самокат\n" + "на пару дней\n" + "Привезём его прямо к вашей двери,\n" + "а когда накатаетесь — заберём\n";
+        assertTrue("Лого самокат не ведет на главную", expectedResult.contains(mainPageHeaderText));
     }
 
     @Test
-    public void yandexLogoOpenNewTabWithYandexMainPage(){
-        driver.get(YANDEX_SCOOTER);
-        homePage.clickYandexLogo();
-        assertTrue(homePage.getMainPageYandexLogoLocator().isDisplayed());
-    }
-
-    @After
-    public void teardown() {
-        driver.quit();
+    public void yandexLogoOpenNewTabWithYandexMainPage() {
+        boolean isYandexLogoDisplayed = new HomePage(driver)
+                .open()
+                .clickYandexLogo()
+                .getYandexLogoIsDisplayed();
+        assertTrue(isYandexLogoDisplayed);
     }
 }

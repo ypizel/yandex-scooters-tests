@@ -1,4 +1,4 @@
-package PageObgect;
+package PageObject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -7,9 +7,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class OrderFields {
+public class OrderFields extends BaseObjectPage{
 
-    private final WebDriver driver;
+    public OrderFields(WebDriver driver) {
+        super(driver);
+    }
+    public static String URL = "https://qa-scooter.praktikum-services.ru/";
 
 
     // Кнопки заказать
@@ -43,16 +46,21 @@ public class OrderFields {
     private final By orderConfirmationButton = (By.xpath(".//button[contains(@class, 'Button_Button__ra12g Button_Middle__1CSJM') and contains(text(), 'Да')]"));
 
     // Заказ оформлен
-    private final By orderStatus = (By.xpath(".//button[contains(@class, 'Button_Button__ra12g Button_Middle__1CSJM') and contains(text(), 'Посмотреть статус')]"));
+    private final By orderStatus =
+            (By.xpath(".//button[contains(@class, 'Button_Button__ra12g Button_Middle__1CSJM') and contains(text(), 'Посмотреть статус')]"));
     // Конструктор
-    public OrderFields(WebDriver driver) {
-        this.driver = driver;
+
+    @Override
+    public OrderFields open(){
+        driver.get(URL);
+        return this;
     }
 
     // Домашняя страница и страница ввода информации о клиенте
     // Локаторы кнопок заказать на главной странице
-    public void clickTopOrderButton(){
+    public OrderFields clickTopOrderButton(){
         driver.findElement(topRightOrderButton).click();
+        return this;
     }
     private WebElement getBottomOrderButtonLocator() {
         return driver.findElement(bottomOrderButton);
@@ -64,11 +72,12 @@ public class OrderFields {
         WebDriverWait pause = new WebDriverWait(driver, 3);
         pause.until(ExpectedConditions.elementToBeClickable(element));
     }
-    public void clickBottomOrderButton(){
+    public OrderFields clickBottomOrderButton(){
         WebElement element = driver.findElement(bottomOrderButton);
         waitElementClickable(element);
         scrollToBottomButton();
         element.click();
+        return this;
     }
 
     // Локатор страницы информации о пользователе
@@ -85,8 +94,8 @@ public class OrderFields {
     }
 
     // Локатор кнопки статуса заказа
-    public WebElement getOrderStatus(){
-        return driver.findElement(orderStatus);
+    public boolean getOrderStatus(){
+        return driver.findElement(orderStatus).isDisplayed();
     }
 
     // Заполнение полей о пользователе
@@ -141,7 +150,7 @@ public class OrderFields {
     }
 
     // Ввести всю информацию о клиенте
-    public void setAllOrderFields() {
+    public OrderFields setAllOrderFields() {
         waitElementClickable(getNameFieldLocator());
         setName("Иван");
         setSurname("Иванов");
@@ -155,5 +164,6 @@ public class OrderFields {
         setBlackColorCheckBox();
         clickLastOrderButton();
         clickOrderConfirmationButton();
+        return this;
     }
 }

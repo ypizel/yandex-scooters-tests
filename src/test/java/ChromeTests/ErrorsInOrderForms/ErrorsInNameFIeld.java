@@ -1,7 +1,7 @@
 package ChromeTests.ErrorsInOrderForms;
 
-import PageObgect.ErrorsMessages;
-import PageObgect.OrderFields;
+import PageObject.ErrorsMessages;
+import PageObject.OrderFields;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,7 +11,6 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
-import static Constants.URL.FIRST_ORDER_PAGE;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(Parameterized.class)
@@ -52,7 +51,7 @@ public class ErrorsInNameFIeld {
 
     @Test
     public void checkErrorsInNameField() {
-        driver.get(FIRST_ORDER_PAGE);
+        driver.get(errorsMessages.FIRST_ORDER_FIELD);
         orderFields.setName(name);
         builder.sendKeys(Keys.TAB).build().perform();
         assertEquals(expectedErrorMessage, errorsMessages.getNameErrorMessage());

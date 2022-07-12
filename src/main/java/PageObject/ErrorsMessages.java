@@ -1,18 +1,16 @@
-package PageObgect;
+package PageObject;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.interactions.Action;
-import org.openqa.selenium.interactions.Actions;
 
 public class ErrorsMessages {
-    private WebDriver driver;
 
+    private WebDriver driver;
     public ErrorsMessages(WebDriver driver) {
         this.driver = driver;
     }
-
+    public static String URL = "https://qa-scooter.praktikum-services.ru/order";
+    public static String FIRST_ORDER_FIELD = "https://qa-scooter.praktikum-services.ru/order";
     private final By nameErrorMessage =
         (By.xpath(".//div[contains(@class, 'Input_ErrorMessage__3HvIb Input_Visible___syz6') and contains(text(),'Введите корректное имя')]"));
     private final By surnameErrorMessage =
@@ -34,4 +32,5 @@ public class ErrorsMessages {
     public String getAddressErrorMassage() {
         return driver.findElement(addressErrorMessage).getText();
     }
+
 }

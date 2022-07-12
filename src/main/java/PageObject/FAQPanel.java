@@ -1,4 +1,4 @@
-package PageObgect;
+package PageObject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -7,10 +7,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class FAQPanel {
+public class FAQPanel extends BaseObjectPage{
 
-    private final WebDriver driver;
-
+    public FAQPanel(WebDriver driver) {
+        super(driver);
+    }
+    public static String URL = "https://qa-scooter.praktikum-services.ru/";
     private final By yandexScooterFAQ = By.xpath(".//div[contains(@class,'Home_SubHeader__zwi_E') and contains(text(), 'Вопросы о важном')]");
 
     // Разделы с информацией
@@ -38,8 +40,10 @@ public class FAQPanel {
     private final By coverageZoneInfoButton = By.id("accordion__heading-7");
     private final By coverageZoneInfo = By.id("accordion__panel-7");
 
-    public FAQPanel(WebDriver driver) {
-        this.driver = driver;
+    @Override
+    public FAQPanel open(){
+        driver.get(URL);
+        return this;
     }
 
     // Локаторы
@@ -55,7 +59,6 @@ public class FAQPanel {
         WebDriverWait pause = new WebDriverWait(driver, 3);
             pause.until(ExpectedConditions.visibilityOf(element));
     }
-
 
     public String getPaymentInfo(){
         scrollToFAQ();

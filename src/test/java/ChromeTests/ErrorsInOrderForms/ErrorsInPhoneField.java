@@ -1,6 +1,7 @@
 package ChromeTests.ErrorsInOrderForms;
-import PageObgect.ErrorsMessages;
-import PageObgect.OrderFields;
+import PageObject.ErrorsMessages;
+import PageObject.HomePage;
+import PageObject.OrderFields;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,13 +11,13 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
-import static Constants.URL.FIRST_ORDER_PAGE;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(Parameterized.class)
 public class ErrorsInPhoneField {
 
         private WebDriver driver;
+        private ErrorsMessages errorsMessages;
         private Actions builder;
         private final String phoneNumber;
         private final String expectedErrorMessage;
@@ -40,12 +41,12 @@ public class ErrorsInPhoneField {
             System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
             driver = new ChromeDriver();
             builder = new Actions(driver);
+            errorsMessages = new ErrorsMessages(driver);
         }
 
         @Test
         public void checkErrorsInPhoneField() {
-            driver.get(FIRST_ORDER_PAGE);
-            ErrorsMessages errorsMessages = new ErrorsMessages(driver);
+            driver.get(errorsMessages.FIRST_ORDER_FIELD);
             OrderFields orderFields = new OrderFields(driver);
             orderFields.setPhoneNumber(phoneNumber);
             builder.sendKeys(Keys.TAB).build().perform();
