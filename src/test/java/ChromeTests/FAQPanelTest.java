@@ -13,7 +13,7 @@ public class FAQPanelTest extends BaseChromeUITest {
         String paymentInfo = new FAQPanel(driver)
                 .open()
                 .getPaymentInfo();
-        assertEquals("Information not found or incorrect", PAYMENT_INFO, paymentInfo);
+        assertEquals("Information not found or incorrect", EXPECTED_PAYMENT_INFO, paymentInfo);
     }
 
     @Test
@@ -21,7 +21,7 @@ public class FAQPanelTest extends BaseChromeUITest {
         String amountOfScootersInfo = new FAQPanel(driver)
                 .open()
                 .getAmountOfScootersInfo();
-        assertEquals("Information not found or incorrect", AMOUNT_OF_SCOOTERS_INFO, amountOfScootersInfo);
+        assertEquals("Information not found or incorrect", EXPECTED_AMOUNT_OF_SCOOTERS_INFO, amountOfScootersInfo);
     }
 
     @Test
@@ -29,7 +29,7 @@ public class FAQPanelTest extends BaseChromeUITest {
         String rentTimeInfo = new FAQPanel(driver)
                 .open()
                 .getRentTimeInfo();
-        assertEquals("Information not found or incorrect", RENT_TIME_INFO, rentTimeInfo);
+        assertEquals("Information not found or incorrect", EXPECTED_RENT_TIME_INFO, rentTimeInfo);
     }
 
     @Test
@@ -37,7 +37,7 @@ public class FAQPanelTest extends BaseChromeUITest {
         String ScooterTodayInfo = new FAQPanel(driver)
                 .open()
                 .getScooterTodayInfo();
-        assertEquals("Information not found or incorrect", SCOOTER_TODAY_INFO, ScooterTodayInfo);
+        assertEquals("Information not found or incorrect", EXPECTED_SCOOTER_TODAY_INFO, ScooterTodayInfo);
     }
 
     @Test
@@ -45,7 +45,7 @@ public class FAQPanelTest extends BaseChromeUITest {
         String extendReturnInfo = new FAQPanel(driver)
                 .open()
                 .getExtendReturnInfo();
-        assertEquals("Information not found or incorrect", EXTEND_RETURN_INFO, extendReturnInfo);
+        assertEquals("Information not found or incorrect", EXPECTED_EXTEND_RETURN_INFO, extendReturnInfo);
     }
 
     @Test
@@ -53,7 +53,7 @@ public class FAQPanelTest extends BaseChromeUITest {
         String chargerCableInfo = new FAQPanel(driver)
                 .open()
                 .getChargerCableInfo();
-        assertEquals("Information not found or incorrect", CHARGER_CABLE_INFO, chargerCableInfo);
+        assertEquals("Information not found or incorrect", EXPECTED_CHARGER_CABLE_INFO, chargerCableInfo);
     }
 
     @Test
@@ -61,7 +61,7 @@ public class FAQPanelTest extends BaseChromeUITest {
         String orderConfirmationInfo = new FAQPanel(driver)
                 .open()
                 .getOrderCancellationInfo();
-        assertEquals("Information not found or incorrect", ORDER_CANCELLATION_INFO, orderConfirmationInfo);
+        assertEquals("Information not found or incorrect", EXPECTED_ORDER_CANCELLATION_INFO, orderConfirmationInfo);
     }
 
     @Test
@@ -69,6 +69,6 @@ public class FAQPanelTest extends BaseChromeUITest {
         String coverageZoneInfo = new FAQPanel(driver)
                 .open()
                 .getCoverageZoneInfo();
-        assertEquals("Information not found or incorrect", COVERAGE_ZONE_INFO, coverageZoneInfo);
+        assertEquals("Information not found or incorrect", EXPECTED_COVERAGE_ZONE_INFO, coverageZoneInfo);
     }
 }

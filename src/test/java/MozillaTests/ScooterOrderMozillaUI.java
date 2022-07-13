@@ -1,6 +1,5 @@
 package MozillaTests;
 
-import ChromeTests.BaseMozillaUITest;
 import PageObject.OrderFields;
 
 import org.junit.Test;
